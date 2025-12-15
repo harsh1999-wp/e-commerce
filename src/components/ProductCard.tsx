@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ProductType } from "@/types";
 import Image from "next/image";
+import { ShoppingBagIcon, ShoppingCart } from "lucide-react";
 
 
 
@@ -25,8 +26,8 @@ export const ProductCard = ({product}:{product:ProductType}) =>{
                 <div className="flex flex-col gap-1"> 
                     <span className="text-gray-500">Size</span>
                     <select name="size" id="size" className="ring ring-gray-300 rounded-md px-2 py-1">
-                        {product.sizes.map(size =>(
-                            <option value={size}>{size.toUpperCase()}</option>
+                        {product.sizes.map(size => (
+                            <option key={size} value={size}>{size.toUpperCase()}</option>
                         ))}
                     </select>
                 </div>
@@ -43,6 +44,12 @@ export const ProductCard = ({product}:{product:ProductType}) =>{
                        ))} 
                     </div>
                 </div>
+            </div>
+            {/*Price and Add to cart Button*/}
+            <div className="flex items-center justify-between">
+                <p className="font-medium">${product.price.toFixed(2)}</p>
+                <button className="ring-1 ring-gray-200 shadow-lg rounded-md px-2 py-1 text-sm cursor-pointer hover:text-white hover:bg-black transition-all duration-300 flex items-center gap-2">
+                    < ShoppingCart className="h-4 w-4 gap-2"/>Add to Cart</button>
             </div>
          </div>
         </div>
