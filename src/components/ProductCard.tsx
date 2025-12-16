@@ -4,10 +4,12 @@ import Link from "next/link";
 import { ProductType } from "@/types";
 import Image from "next/image";
 import { ShoppingBagIcon, ShoppingCart } from "lucide-react";
+import { useState } from "react";
 
 
 
 export const ProductCard = ({product}:{product:ProductType}) =>{
+    const [IsColor , IsSetColor]= useState("fasle");
     return(
         <div className="shadow-lg rounded-lg overflow-hidden">
          <Link
