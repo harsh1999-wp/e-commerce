@@ -9,13 +9,29 @@ import { useState } from "react";
 
 
 export const ProductCard = ({product}:{product:ProductType}) =>{
-    const [IsColor , IsSetColor]= useState("fasle");
+    const [productTypes , setproductTypes] = useState({
+        size:product.sizes[0],
+        color:product.colors[0],
+    });
+
+    const handleProductType= ({
+        type,
+        value
+    }:{
+        type:"size" | "color", 
+        value:string
+       })=>{
+        setproductTypes((Prev) => ({
+            ...Prev,
+            [type]:value,
+        }))
+       }
     return(
         <div className="shadow-lg rounded-lg overflow-hidden">
          <Link
          href={`/product/${product.id}`}>
             <div className=" relative aspect-[2/3]">
-                <Image src={product.images[product.colors[0]]} alt= {product.name} fill className="object-cover hover:scale-105 transition-all duration-300"/>
+                <Image src={product.images[productTypes.color]} alt= {product.name} fill className="object-cover hover:scale-105 transition-all duration-300"/>
             </div>
          </Link>
          {/* PRODUCT DETAIL*/}
@@ -27,7 +43,8 @@ export const ProductCard = ({product}:{product:ProductType}) =>{
                 {/*Sizes*/}
                 <div className="flex flex-col gap-1"> 
                     <span className="text-gray-500">Size</span>
-                    <select name="size" id="size" className="ring ring-gray-300 rounded-md px-2 py-1">
+                    <select name="size" id="size" className="ring ring-gray-300 rounded-md px-2 py-1"
+                    onChange={e=>handleProductType({type:"size", value:e.target.value })}>
                         {product.sizes.map(size => (
                             <option key={size} value={size}>{size.toUpperCase()}</option>
                         ))}
@@ -36,9 +53,12 @@ export const ProductCard = ({product}:{product:ProductType}) =>{
                 {/* Colors*/}
                 <div className="flex flex-col gap-1">
                     <span className="text-color-gray"> colors</span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2"
+                    >
                        {product.colors.map(color =>(
-                        <div className="" key ={color}>
+                        <div className={`cursor-pointer border-1 ${productTypes.color == color} ?"border-gray-300" :"border-gray-200" rounded-full p-[1.2px]`} 
+                        key ={color}
+                        onClick={()=>handleProductType({type:"color" , value:color})}>
                             <div className="w-[14px] h-[14px] rounded-full"
                             style={{backgroundColor:color}}
                             />
