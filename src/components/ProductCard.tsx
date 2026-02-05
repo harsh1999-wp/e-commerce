@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ProductType } from "@/types";
 import Image from "next/image";
-import { ShoppingBagIcon, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 
 
@@ -25,7 +25,8 @@ export const ProductCard = ({product}:{product:ProductType}) =>{
             ...Prev,
             [type]:value,
         }))
-       }
+       };
+
     return(
         <div className="shadow-lg rounded-lg overflow-hidden">
          <Link
@@ -55,7 +56,7 @@ export const ProductCard = ({product}:{product:ProductType}) =>{
                     <span className="text-color-gray"> colors</span>
                     <div className="flex items-center gap-2"
                     >
-                       {product.colors.map(color =>(
+                       {product.colors.map(color => (
                         <div className={`cursor-pointer border-1 ${productTypes.color == color} ?"border-gray-300" :"border-gray-200" rounded-full p-[1.2px]`} 
                         key ={color}
                         onClick={()=>handleProductType({type:"color" , value:color})}>
