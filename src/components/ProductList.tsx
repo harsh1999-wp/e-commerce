@@ -1,6 +1,7 @@
 import { ProductsType } from "@/types";
 import Link from "next/link";
 import { ProductCard } from "./ProductCard";
+import { Categories} from "./Categories";
 
 const products:ProductsType = [
   {
@@ -113,9 +114,11 @@ const products:ProductsType = [
   },
 ];
 
-export const ProductList =({ category } :{ category : string})=>{
+export const ProductList =({ category , params } :{ category : string , params :"Homepage" | "products"
+})=>{
     return(
         <div className="w-full">
+          <Categories/>
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12">
                 {products.map(product =>
                 (

@@ -56,7 +56,7 @@ const categories = [
   },
 ];
 
-export const Categotries = () =>{
+export const Categories = () =>{
   const searchParams = useSearchParams();// need to see what does this means
   const router = useRouter(); 
   const pathname = usePathname();
